@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import Grid from '@mui/material/Grid'
 import Stack from '@mui/material/Stack'
 
@@ -25,8 +25,10 @@ import { formatNumber, formatPercent } from '../utils/format'
 import type { Filters } from '../types/dashboard'
 
 export default function DashboardPage() {
-  // Por ahora los filtros son fijos: la interacción con useState
-  const filters: Filters = DEFAULT_FILTERS
+  // useState, el estado de los filtros vive aquí y se comparte con los hijos por props.
+  const [filters, setFilters] = useState<Filters>(DEFAULT_FILTERS)
+
+  // Datos derivados, se recalculan cuando cambian los filtros.
   const logs = useMemo(() => filterLogs(sampleLogs, filters), [filters])
   const kpis = useMemo(() => computeKpis(logs), [logs])
   const dailyCounts = useMemo(() => buildDailyCounts(logs), [logs])
@@ -42,7 +44,7 @@ export default function DashboardPage() {
           dataInfo="Datos: 01/01/2024 – 06/02/2024 · 5.000 registros"
         />
 
-        <FilterBar filters={filters} onFilterChange={() => {}} />
+        <FilterBar filters={filters} onFilterChange={setFilters} />
 
         {/* KPI: 3 en una fila */}
         <Grid container spacing={2}>

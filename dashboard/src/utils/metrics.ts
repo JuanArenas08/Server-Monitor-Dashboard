@@ -21,17 +21,17 @@ export function computeKpis(logs: LogRecord[]): KpiData {
   }
 }
 
-// agrupar por día -> [{ date, count }]
+// Agrupar por día -> [{ date, count }]
 export function buildDailyCounts(logs: LogRecord[]): DailyCount[] {
   return []
 }
 
-// contar por status_code -> [{ code, count, percentage }]
+// Contar por status_code -> [{ code, count, percentage }]
 export function buildCodeStats(logs: LogRecord[]): CodeStat[] {
   return []
 }
 
-// contar por method -> [{ method, count, percentage }]
+// Contar por method -> [{ method, count, percentage }]
 export function buildMethodStats(logs: LogRecord[]): MethodStat[] {
   return []
 }

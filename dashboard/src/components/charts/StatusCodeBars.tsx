@@ -6,5 +6,6 @@ interface StatusCodeBarsProps {
 }
 
 export default function StatusCodeBars({ items }: StatusCodeBarsProps) {
+  // Barras horizontales por código HTTP
   return <ChartPlaceholder name="StatusCodeBars" itemCount={items.length} />
 }
