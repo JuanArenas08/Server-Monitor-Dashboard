@@ -5,6 +5,7 @@ const theme = createTheme({
     background: { default: '#f1f3f8' },
   },
   shape: { borderRadius: 12 },
+  // Ajustar colores y tipografía según el Figma
 })
 
 export default theme
