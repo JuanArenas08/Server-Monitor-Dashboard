@@ -25,7 +25,7 @@ export default function SelectFilter({
   }
 
   return (
-    <FormControl fullWidth size="small" sx={{ minWidth: 220 }}>
+    <FormControl fullWidth size="small" sx={{ minWidth: { md: 220 } }}>
       <InputLabel id={`${id}-label`}>{label}</InputLabel>
       <Select
         labelId={`${id}-label`}

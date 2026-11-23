@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react'
 import Grid from '@mui/material/Grid'
 import Stack from '@mui/material/Stack'
+import { useTheme } from '@mui/material/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 import DashboardLayout from '../components/layout/DashboardLayout'
 import DashboardHeader from '../components/layout/DashboardHeader'
@@ -25,6 +27,9 @@ import { formatNumber, formatPercent } from '../utils/format'
 import type { Filters } from '../types/dashboard'
 
 export default function DashboardPage() {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('md')) // < 768px
+
   // useState, el estado de los filtros vive aquí y se comparte con los hijos por props.
   const [filters, setFilters] = useState<Filters>(DEFAULT_FILTERS)
 
@@ -46,16 +51,16 @@ export default function DashboardPage() {
 
         <FilterBar filters={filters} onFilterChange={setFilters} />
 
-        {/* KPI: 3 en una fila */}
+        {/* KPI: 3 en una fila (escritorio) / 2 + 1 (móvil) */}
         <Grid container spacing={2}>
-          <Grid size={4}>
+          <Grid size={{ xs: 6, md: 4 }}>
             <KpiCard
               title="Solicitudes"
               value={formatNumber(kpis.totalRequests)}
               subtitle={`≈ ${kpis.requestsPerDay} por día`}
             />
           </Grid>
-          <Grid size={4}>
+          <Grid size={{ xs: 6, md: 4 }}>
             <KpiCard
               title="Tasa de errores"
               value={formatPercent(kpis.errorRate)}
@@ -63,7 +68,7 @@ export default function DashboardPage() {
               variant="error"
             />
           </Grid>
-          <Grid size={4}>
+          <Grid size={{ xs: 12, md: 4 }}>
             <KpiCard
               title="Tiempo promedio de respuesta"
               value={`${formatNumber(kpis.avgResponseMs)} ms`}
@@ -81,12 +86,12 @@ export default function DashboardPage() {
         </SectionCard>
 
         <Grid container spacing={2}>
-          <Grid size={7}>
+          <Grid size={{ xs: 12, md: 7 }}>
             <SectionCard title="Códigos HTTP" subtitle="Cantidad de solicitudes por código de estado">
               <StatusCodeBars items={codeStats} />
             </SectionCard>
           </Grid>
-          <Grid size={5}>
+          <Grid size={{ xs: 12, md: 5 }}>
             <SectionCard title="Métodos HTTP" subtitle="Proporción de solicitudes por método">
               <MethodsDonut items={methodStats} />
             </SectionCard>
@@ -99,6 +104,7 @@ export default function DashboardPage() {
             key={`${filters.dateRange}-${filters.serverId}`}
             logs={logs}
             pageSize={PAGE_SIZE}
+            isMobile={isMobile}
           />
         </SectionCard>
       </Stack>

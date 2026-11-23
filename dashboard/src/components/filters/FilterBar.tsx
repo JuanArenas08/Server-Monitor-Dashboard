@@ -10,7 +10,8 @@ interface FilterBarProps {
 
 export default function FilterBar({ filters, onFilterChange }: FilterBarProps) {
   return (
-    <Stack direction="row" spacing={2}>
+    // Escritorio: en una fila. Móvil: uno debajo del otro.
+    <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
       <SelectFilter
         label="Fecha"
         value={filters.dateRange}

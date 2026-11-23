@@ -13,10 +13,15 @@ export default function DashboardHeader({
   dataInfo,
 }: DashboardHeaderProps) {
   return (
+    // Escritorio: título a la izquierda y datos a la derecha.
+    // Móvil: todo agrupado en un mismo bloque (columna).
     <Stack
-      direction="row"
+      direction={{ xs: 'column', md: 'row' }}
       spacing={0.5}
-      sx={{ justifyContent: 'space-between', alignItems: 'flex-end' }}
+      sx={{
+        justifyContent: 'space-between',
+        alignItems: { xs: 'flex-start', md: 'flex-end' },
+      }}
     >
       <div>
         <Typography variant="h4" component="h1" sx={{ fontWeight: 'bold' }}>

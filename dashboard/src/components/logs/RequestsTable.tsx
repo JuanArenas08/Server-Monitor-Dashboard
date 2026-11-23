@@ -1,3 +1,4 @@
+import Button from '@mui/material/Button'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -15,7 +16,9 @@ interface RequestsTableProps {
   page: number
   pageSize: number
   totalRecords: number
+  isMobile: boolean
   onPageChange: (page: number) => void
+  onLoadMore: () => void
 }
 
 function renderCell(row: LogRecord, key: LogColumn['key']) {
@@ -39,7 +42,9 @@ export default function RequestsTable({
   page,
   pageSize,
   totalRecords,
+  isMobile,
   onPageChange,
+  onLoadMore,
 }: RequestsTableProps) {
   return (
     <>
@@ -64,14 +69,24 @@ export default function RequestsTable({
         </Table>
       </TableContainer>
 
-      <TablePagination
-        component="div"
-        count={totalRecords}
-        page={page}
-        rowsPerPage={pageSize}
-        rowsPerPageOptions={[]}
-        onPageChange={(_, newPage) => onPageChange(newPage)}
-      />
+      {isMobile ? (
+        // Móvil: botón "Ver más registros" (solo si quedan registros)
+        rows.length < totalRecords && (
+          <Button fullWidth variant="outlined" sx={{ mt: 2 }} onClick={onLoadMore}>
+            Ver más registros
+          </Button>
+        )
+      ) : (
+        // Escritorio: paginación
+        <TablePagination
+          component="div"
+          count={totalRecords}
+          page={page}
+          rowsPerPage={pageSize}
+          rowsPerPageOptions={[]}
+          onPageChange={(_, newPage) => onPageChange(newPage)}
+        />
+      )}
     </>
   )
 }

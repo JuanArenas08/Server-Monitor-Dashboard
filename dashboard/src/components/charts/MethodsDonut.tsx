@@ -6,6 +6,5 @@ interface MethodsDonutProps {
 }
 
 export default function MethodsDonut({ items }: MethodsDonutProps) {
-  // Gráfico de dona por método HTTP
   return <ChartPlaceholder name="MethodsDonut" itemCount={items.length} />
 }

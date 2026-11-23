@@ -24,3 +24,10 @@ export const COLUMNS_DESKTOP: LogColumn[] = [
   { key: 'status_code', label: 'Código' },
   { key: 'response_time_ms', label: 'Tiempo (ms)' },
 ]
+
+export const COLUMNS_MOBILE: LogColumn[] = [
+  { key: 'timestamp', label: 'Hora' },
+  { key: 'method', label: 'Método' },
+  { key: 'status_code', label: 'Código' },
+  { key: 'response_time_ms', label: 'ms' },
+]

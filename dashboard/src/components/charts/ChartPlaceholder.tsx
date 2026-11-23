@@ -7,7 +7,6 @@ interface ChartPlaceholderProps {
   height?: number
 }
 
-// Marcador temporal
 export default function ChartPlaceholder({
   name,
   itemCount,
